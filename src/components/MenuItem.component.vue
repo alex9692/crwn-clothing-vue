@@ -1,5 +1,5 @@
 <template>
-  <div :class="`${size} menu-item`">
+  <div :class="`${size} menu-item`" @click="$router.push(`${linkUrl}`)">
     <div class="background-image" :style="{backgroundImage: `url(${imageUrl})`}"></div>
     <div class="content">
       <h1 class="title">{{title.toUpperCase()}}</h1>
@@ -21,6 +21,10 @@ export default {
     },
     size: {
       type: String,
+    },
+    linkUrl: {
+      type: String,
+      required: true,
     },
   },
 };
