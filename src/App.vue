@@ -13,5 +13,6 @@ export default {
 <style>
 body {
   font-family: "Open Sans Condensed", sans-serif;
+  padding: 20px 60px;
 }
 </style>

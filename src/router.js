@@ -4,11 +4,11 @@ import VueRouter from "vue-router";
 Vue.use(VueRouter);
 
 import Homepage from "./views/Homepage.vue";
-import Hatspage from "./views/Hatspage.vue";
+const Shoppage = () => import("./views/Shop.vue");
 
 const routes = [
   { path: "/", component: Homepage },
-  { path: "/shop/hats", component: Hatspage },
+  { path: "/shop", component: Shoppage },
 ];
 
 const router = new VueRouter({
