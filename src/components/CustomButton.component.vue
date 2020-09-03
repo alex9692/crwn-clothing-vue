@@ -1,11 +1,17 @@
 <template>
-  <button class="custom-button" v-bind="$attrs" v-on="$listeners">
+  <button
+    :class="[isGoogleSignIn ? 'google-sign-in': '','custom-button']"
+    v-bind="$attrs"
+    v-on="$listeners"
+  >
     <slot />
   </button>
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["isGoogleSignIn"],
+};
 </script>
 
 <style lang="scss" scoped>
@@ -29,6 +35,15 @@ export default {};
     background-color: white;
     color: black;
     border: 1px solid black;
+  }
+  &.google-sign-in {
+    background-color: #4285f4;
+    color: #fff;
+
+    &:hover {
+      background-color: #357ae8;
+      border: none;
+    }
   }
 }
 </style>

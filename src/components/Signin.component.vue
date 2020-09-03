@@ -7,7 +7,14 @@
 
       <FormInput type="password" name="password" v-model="password" required label="Password" />
 
-      <CustomButton type="submit">Sign in</CustomButton>
+      <div class="buttons">
+        <CustomButton type="submit">Sign in</CustomButton>
+        <CustomButton
+          :isGoogleSignIn="true"
+          type="button"
+          @click="signInWithGoogle"
+        >Sign in with Google</CustomButton>
+      </div>
     </form>
   </div>
 </template>
@@ -15,6 +22,8 @@
 <script>
 import FormInput from "@/components/FormInput.component.vue";
 import CustomButton from "@/components/CustomButton.component.vue";
+import { signInWithGoogle } from "@/firebase/firebase.utils.js";
+
 export default {
   components: {
     FormInput,
@@ -32,18 +41,24 @@ export default {
       this.email = "";
       this.password = "";
     },
+    signInWithGoogle: signInWithGoogle,
   },
 };
 </script>
 
 <style lang="scss" scoped>
 .sign-in {
-  width: 30vw;
+  width: 380px;
   display: flex;
   flex-direction: column;
 
   .title {
     margin: 10px 0;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: space-between;
   }
 }
 </style>

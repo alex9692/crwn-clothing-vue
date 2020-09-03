@@ -1,14 +1,31 @@
 <template>
   <div>
-    <Header />
+    <Header :authUser="!!currentUser" />
     <router-view></router-view>
   </div>
 </template>
 
 <script>
 import Header from "@/components/Header.component.vue";
+import { auth } from "@/firebase/firebase.utils.js";
 export default {
   components: { Header },
+  data() {
+    return {
+      currentUser: null,
+      unsubscribe: null,
+    };
+  },
+  created() {
+    this.unsubscribe = auth.onAuthStateChanged((user) => {
+      this.currentUser = user;
+
+      console.log(user);
+    });
+  },
+  destroyed() {
+    this.unsubscribe();
+  },
 };
 </script>
 
@@ -20,5 +37,8 @@ body {
 a {
   text-decoration: none;
   color: #000;
+}
+* {
+  box-sizing: border-box;
 }
 </style>

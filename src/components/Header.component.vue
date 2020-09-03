@@ -7,12 +7,22 @@
       <router-link class="option" to="/shop">SHOP</router-link>
       <router-link class="option" to>CONTACT</router-link>
       <router-link class="option" to>ABOUT</router-link>
+      <router-link class="option" v-if="!authUser" to="/auth">SIGN IN</router-link>
+      <div v-if="authUser" class="option" @click="auth.signOut()">SIGN OUT</div>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+import { auth } from "@/firebase/firebase.utils.js";
+export default {
+  props: ["authUser"],
+  data() {
+    return {
+      auth: auth,
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -38,6 +48,7 @@ export default {};
 
     .option {
       padding: 10px 15px;
+      cursor: pointer;
     }
   }
 }
