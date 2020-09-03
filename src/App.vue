@@ -7,7 +7,7 @@
 
 <script>
 import Header from "@/components/Header.component.vue";
-import { auth } from "@/firebase/firebase.utils.js";
+import { auth, createUserProfileDoc } from "@/firebase/firebase.utils.js";
 export default {
   components: { Header },
   data() {
@@ -17,10 +17,20 @@ export default {
     };
   },
   created() {
-    this.unsubscribe = auth.onAuthStateChanged((user) => {
-      this.currentUser = user;
+    this.unsubscribe = auth.onAuthStateChanged(async (user) => {
+      // this.currentUser = user;
+      if (user) {
+        const userRef = await createUserProfileDoc(user);
 
-      console.log(user);
+        userRef.onSnapshot((snapshot) => {
+          this.currentUser = {
+            id: snapshot.id,
+            ...snapshot.data(),
+          };
+        });
+      } else {
+        this.currentUser = null;
+      }
     });
   },
   destroyed() {

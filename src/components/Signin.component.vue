@@ -22,7 +22,7 @@
 <script>
 import FormInput from "@/components/FormInput.component.vue";
 import CustomButton from "@/components/CustomButton.component.vue";
-import { signInWithGoogle } from "@/firebase/firebase.utils.js";
+import { auth, signInWithGoogle } from "@/firebase/firebase.utils.js";
 
 export default {
   components: {
@@ -36,10 +36,14 @@ export default {
     };
   },
   methods: {
-    onSubmit() {
-      console.log(this.email, this.password);
-      this.email = "";
-      this.password = "";
+    async onSubmit() {
+      try {
+        await auth.signInWithEmailAndPassword(this.email, this.password);
+        this.email = "";
+        this.password = "";
+      } catch (err) {
+        console.error(err);
+      }
     },
     signInWithGoogle: signInWithGoogle,
   },
