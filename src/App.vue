@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header :authUser="!!currentUser" />
+    <Header />
     <router-view></router-view>
   </div>
 </template>
@@ -8,11 +8,11 @@
 <script>
 import Header from "@/components/Header.component.vue";
 import { auth, createUserProfileDoc } from "@/firebase/firebase.utils.js";
+
 export default {
   components: { Header },
   data() {
     return {
-      currentUser: null,
       unsubscribe: null,
     };
   },
@@ -23,13 +23,13 @@ export default {
         const userRef = await createUserProfileDoc(user);
 
         userRef.onSnapshot((snapshot) => {
-          this.currentUser = {
+          this.$store.dispatch("user/setCurrentUser", {
             id: snapshot.id,
             ...snapshot.data(),
-          };
+          });
         });
       } else {
-        this.currentUser = null;
+        this.$store.dispatch("user/setCurrentUser", null);
       }
     });
   },

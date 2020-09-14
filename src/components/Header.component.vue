@@ -15,8 +15,14 @@
 
 <script>
 import { auth } from "@/firebase/firebase.utils.js";
+import { mapState } from "vuex";
 export default {
-  props: ["authUser"],
+  // props: ["authUser"],
+  computed: {
+    ...mapState({
+      authUser: (state) => state.user.currentUser,
+    }),
+  },
   data() {
     return {
       auth: auth,
