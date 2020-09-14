@@ -2,17 +2,30 @@ import { userActions } from "./user.actions";
 
 const state = () => ({
   currentUser: null,
+  loading: false,
 });
 
 const mutations = {
   [userActions.SET_CURRENT_USER]: (state, payload) => {
     state.currentUser = payload;
   },
+  [userActions.SET_LOADING]: (state, payload) => {
+    state.loading = payload;
+  },
 };
 
 const actions = {
   setCurrentUser({ commit }, payload) {
     commit(userActions.SET_CURRENT_USER, payload);
+  },
+  setLoading({ commit }, payload) {
+    commit(userActions.SET_LOADING, payload);
+  },
+};
+
+const getters = {
+  isAuth(state) {
+    return !!state.currentUser;
   },
 };
 
@@ -21,4 +34,5 @@ export default {
   state,
   mutations,
   actions,
+  getters,
 };
