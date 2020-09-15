@@ -1,9 +1,10 @@
 <template>
   <div class="cart-dropdown">
-    <div class="cart-items">
+    <div class="cart-items" v-if="cartLength > 0">
       <CartItem v-for="item in cartItems" :key="item.id" :item="item" />
     </div>
-    <CustomButton>GO TO CHECKOUT</CustomButton>
+    <div v-else class="empty-message">Your cart is empty</div>
+    <CustomButton @click="gotToCheckout">GO TO CHECKOUT</CustomButton>
   </div>
 </template>
 
@@ -20,7 +21,14 @@ export default {
   computed: {
     ...mapGetters({
       cartItems: "cart/cartItems",
+      cartLength: "cart/cartLength",
     }),
+  },
+  methods: {
+    gotToCheckout() {
+      this.$router.push("/checkout");
+      this.$store.dispatch("cart/toggleCartDropdown");
+    },
   },
 };
 </script>
@@ -44,6 +52,10 @@ export default {
     display: flex;
     flex-direction: column;
     overflow-y: auto;
+  }
+  .empty-message {
+    font-size: 18px;
+    margin: 50px auto;
   }
 
   button {

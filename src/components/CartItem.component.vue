@@ -1,6 +1,6 @@
 <template>
   <div class="cart-item">
-    <img :src="item.imageUrl" alt="item.name" />
+    <img :src="item.imageUrl" alt="item-name" />
     <div class="item-details">
       <span class="name">{{item.name}}</span>
       <span class="price">{{item.quantity}} x ${{item.price}}</span>

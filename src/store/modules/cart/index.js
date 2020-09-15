@@ -38,6 +38,12 @@ const getters = {
   cartItems(state) {
     return state.cartItems;
   },
+  cartTotal(state) {
+    return state.cartItems.reduce(
+      (acc, cur) => acc + cur.quantity * cur.price,
+      0
+    );
+  },
 };
 
 export default {

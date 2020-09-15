@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!loading">
+  <div v-if="!isLoading">
     <Header />
     <router-view></router-view>
   </div>
@@ -13,13 +13,13 @@
 import Header from "@/components/Header.component.vue";
 import Loading from "@/components/Loading.component.vue";
 import { auth, createUserProfileDoc } from "@/firebase/firebase.utils.js";
-import { mapState } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   components: { Header, Loading },
   computed: {
-    ...mapState({
-      loading: (state) => state.user.loading,
+    ...mapGetters({
+      isLoading: "user/isLoading",
     }),
   },
   data() {
@@ -30,7 +30,6 @@ export default {
   created() {
     this.$store.dispatch("user/setLoading", true);
     this.unsubscribe = auth.onAuthStateChanged(async (user) => {
-      // this.currentUser = user;
       if (user) {
         const userRef = await createUserProfileDoc(user);
 

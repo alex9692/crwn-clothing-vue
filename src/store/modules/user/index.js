@@ -30,6 +30,9 @@ const getters = {
   isAuth(state) {
     return !!state.currentUser;
   },
+  isLoading(state) {
+    return state.loading;
+  },
 };
 
 export default {

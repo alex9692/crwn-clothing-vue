@@ -7,6 +7,7 @@ import store from "./store";
 import Homepage from "./views/Homepage.vue";
 const Shoppage = () => import("./views/Shop.vue");
 const Authpage = () => import("./views/Authenticate.vue");
+const Checkout = () => import("./views/Checkout.vue");
 
 const routes = [
   { path: "/", component: Homepage },
@@ -33,6 +34,7 @@ const routes = [
       next();
     },
   },
+  { path: "/checkout", component: Checkout },
 ];
 
 const router = new VueRouter({
