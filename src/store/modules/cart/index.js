@@ -1,8 +1,14 @@
-import { addItemToCart } from "@/store/modules/cart/cart.utils.js";
+import {
+  addItemToCart,
+  removeItemFromCart,
+  subtractItemFromCart,
+} from "@/store/modules/cart/cart.utils.js";
 
 const cartActions = {
   TOGGLE_CART_DROPDOWN: "TOGGLE_CART_DROPDOWN",
   ADD_ITEM: "ADD_ITEM",
+  REMOVE_ITEM: "REMOVE_ITEM",
+  SUBTRACT_ITEM: "SUBTRACT_ITEM",
 };
 
 const state = () => ({
@@ -17,6 +23,12 @@ const mutations = {
   [cartActions.ADD_ITEM]: (state, payload) => {
     state.cartItems = addItemToCart(state.cartItems, payload);
   },
+  [cartActions.REMOVE_ITEM]: (state, payload) => {
+    state.cartItems = removeItemFromCart(state.cartItems, payload);
+  },
+  [cartActions.SUBTRACT_ITEM]: (state, payload) => {
+    state.cartItems = subtractItemFromCart(state.cartItems, payload);
+  },
 };
 
 const actions = {
@@ -25,6 +37,12 @@ const actions = {
   },
   addItemToCart({ commit }, payload) {
     commit(cartActions.ADD_ITEM, payload);
+  },
+  removeItemFromCart({ commit }, payload) {
+    commit(cartActions.REMOVE_ITEM, payload);
+  },
+  subtractItemFromCart({ commit }, payload) {
+    commit(cartActions.SUBTRACT_ITEM, payload);
   },
 };
 

@@ -4,9 +4,13 @@
       <img :src="item.imageUrl" alt="item-name" />
     </div>
     <span class="name">{{item.name}}</span>
-    <span class="quantity">{{item.quantity}}</span>
+    <span class="quantity">
+      <div class="arrow" @click="subtractItemFromCart">&#10094;</div>
+      <span class="value">{{item.quantity}}</span>
+      <div class="arrow" @click="addItemToCart">&#10095;</div>
+    </span>
     <span class="price">{{item.price}}</span>
-    <div class="remove-button">&#10005;</div>
+    <div @click="removeItemFromCart" class="remove-button">&#10005;</div>
   </div>
 </template>
 
@@ -16,6 +20,17 @@ export default {
     item: {
       type: Object,
       required: true,
+    },
+  },
+  methods: {
+    removeItemFromCart() {
+      this.$store.dispatch("cart/removeItemFromCart", this.item);
+    },
+    subtractItemFromCart() {
+      this.$store.dispatch("cart/subtractItemFromCart", this.item);
+    },
+    addItemToCart() {
+      this.$store.dispatch("cart/addItemToCart", this.item);
     },
   },
 };
@@ -47,7 +62,15 @@ export default {
   }
 
   .quantity {
-    padding-left: 20px;
+    display: flex;
+
+    .arrow {
+      cursor: pointer;
+    }
+
+    .value {
+      margin: 0 10px;
+    }
   }
 
   .remove-button {
