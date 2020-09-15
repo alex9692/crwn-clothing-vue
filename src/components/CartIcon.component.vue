@@ -1,12 +1,17 @@
 <template>
   <div class="cart-icon" @click="toggleCartDropdown">
     <img class="shopping-icon" src="@/assets/logo/shopping-bag.svg" alt="cart-icon" />
-    <span class="item-count">0</span>
+    <span class="item-count">{{cartLength}}</span>
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
+  computed: {
+    ...mapGetters({ cartLength: "cart/cartLength" }),
+  },
   methods: {
     toggleCartDropdown() {
       this.$store.dispatch("cart/toggleCartDropdown");

@@ -1,27 +1,25 @@
 <template>
   <div class="collection-item">
-    <div class="image" :style="{backgroundImage: `url(${imageUrl})`}"></div>
+    <div class="image" :style="{backgroundImage: `url(${item.imageUrl})`}"></div>
     <div class="collection-footer">
-      <span class="name">{{name}}</span>
-      <span class="price">{{price}}</span>
+      <span class="name">{{item.name}}</span>
+      <span class="price">{{item.price}}</span>
     </div>
+    <CustomButton @click="addToCart" :inverted="true">ADD TO CART</CustomButton>
   </div>
 </template>
 
 <script>
+import CustomButton from "@/components/CustomButton.component.vue";
+
 export default {
+  components: { CustomButton },
   props: {
-    name: {
-      type: String,
-      required: true,
-    },
-    price: {
-      type: Number,
-      required: true,
-    },
-    imageUrl: {
-      type: String,
-      required: true,
+    item: { type: Object, required: true },
+  },
+  methods: {
+    addToCart() {
+      this.$store.dispatch("cart/addItemToCart", this.item);
     },
   },
 };
@@ -34,6 +32,7 @@ export default {
   flex-direction: column;
   height: 350px;
   align-items: center;
+  position: relative;
 
   .image {
     width: 100%;
@@ -41,6 +40,25 @@ export default {
     background-size: cover;
     background-position: center;
     margin-bottom: 5px;
+  }
+
+  .custom-button {
+    width: 80%;
+    opacity: 0.7;
+    position: absolute;
+    top: 255px;
+    display: none;
+  }
+
+  &:hover {
+    .image {
+      opacity: 0.8;
+    }
+
+    .custom-button {
+      opacity: 0.85;
+      display: flex;
+    }
   }
 
   .collection-footer {

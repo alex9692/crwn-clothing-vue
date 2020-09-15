@@ -2,13 +2,7 @@
   <div class="collection-preview">
     <h1 class="title">{{title.toUpperCase()}}</h1>
     <div class="preview">
-      <CollectionItem
-        v-for="item in slicedArray"
-        :key="item.id"
-        :name="item.name"
-        :price="item.price"
-        :imageUrl="item.imageUrl"
-      />
+      <CollectionItem v-for="item in slicedArray" :key="item.id" :item="item" />
     </div>
   </div>
 </template>

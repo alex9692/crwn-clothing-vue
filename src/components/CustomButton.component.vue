@@ -1,6 +1,6 @@
 <template>
   <button
-    :class="[isGoogleSignIn ? 'google-sign-in': '','custom-button']"
+    :class="[inverted ? 'inverted' : '' , isGoogleSignIn ? 'google-sign-in' : '', 'custom-button']"
     v-bind="$attrs"
     v-on="$listeners"
   >
@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  props: ["isGoogleSignIn"],
+  props: ["isGoogleSignIn", "inverted"],
 };
 </script>
 
@@ -30,6 +30,8 @@ export default {
   font-weight: bolder;
   border: none;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
 
   &:hover {
     background-color: white;
@@ -42,6 +44,17 @@ export default {
 
     &:hover {
       background-color: #357ae8;
+      border: none;
+    }
+  }
+  &.inverted {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+
+    &:hover {
+      background-color: black;
+      color: white;
       border: none;
     }
   }
