@@ -35,6 +35,9 @@ const getters = {
   cartLength(state) {
     return state.cartItems.reduce((acc, cur) => acc + cur.quantity, 0);
   },
+  cartItems(state) {
+    return state.cartItems;
+  },
 };
 
 export default {

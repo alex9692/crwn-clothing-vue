@@ -1,16 +1,26 @@
 <template>
   <div class="cart-dropdown">
-    <div class="cart-items"></div>
+    <div class="cart-items">
+      <CartItem v-for="item in cartItems" :key="item.id" :item="item" />
+    </div>
     <CustomButton>GO TO CHECKOUT</CustomButton>
   </div>
 </template>
 
 <script>
 import CustomButton from "@/components/CustomButton.component.vue";
+import CartItem from "@/components/CartItem.component.vue";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
     CustomButton,
+    CartItem,
+  },
+  computed: {
+    ...mapGetters({
+      cartItems: "cart/cartItems",
+    }),
   },
 };
 </script>
