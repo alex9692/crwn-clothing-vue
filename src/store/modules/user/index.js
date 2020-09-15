@@ -1,4 +1,7 @@
-import { userActions } from "./user.actions";
+const userActions = {
+  SET_CURRENT_USER: "SET_CURRENT_USER",
+  SET_LOADING: "SET_LOADING",
+};
 
 const state = () => ({
   currentUser: null,

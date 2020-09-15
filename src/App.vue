@@ -3,16 +3,20 @@
     <Header />
     <router-view></router-view>
   </div>
-  <div v-else>PLEASE WAIT....</div>
+  <div v-else>
+    <h2 class="loading-text">PLEASE WAIT....</h2>
+    <Loading />
+  </div>
 </template>
 
 <script>
 import Header from "@/components/Header.component.vue";
+import Loading from "@/components/Loading.component.vue";
 import { auth, createUserProfileDoc } from "@/firebase/firebase.utils.js";
 import { mapState } from "vuex";
 
 export default {
-  components: { Header },
+  components: { Header, Loading },
   computed: {
     ...mapState({
       loading: (state) => state.user.loading,
@@ -53,6 +57,9 @@ export default {
 body {
   font-family: "Open Sans Condensed", sans-serif;
   padding: 20px 60px;
+}
+.loading-text {
+  color: #7e7878;
 }
 a {
   text-decoration: none;

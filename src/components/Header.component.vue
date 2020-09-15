@@ -7,20 +7,29 @@
       <router-link class="option" to="/shop">SHOP</router-link>
       <router-link class="option" to>CONTACT</router-link>
       <router-link class="option" to>ABOUT</router-link>
-      <router-link class="option" v-if="!authUser" to="/auth">SIGN IN</router-link>
-      <div v-if="authUser" class="option" @click="auth.signOut()">SIGN OUT</div>
+      <router-link class="option" v-if="!isAuth" to="/auth">SIGN IN</router-link>
+      <div v-if="isAuth" class="option" @click="auth.signOut()">SIGN OUT</div>
+      <CartIcon />
     </div>
+    <CartDropdown v-show="!isHidden" />
   </div>
 </template>
 
 <script>
 import { auth } from "@/firebase/firebase.utils.js";
-import { mapState } from "vuex";
+import { mapGetters } from "vuex";
+import CartIcon from "@/components/CartIcon.component.vue";
+import CartDropdown from "@/components/CartDropdown.component.vue";
+
 export default {
-  // props: ["authUser"],
+  components: {
+    CartIcon,
+    CartDropdown,
+  },
   computed: {
-    ...mapState({
-      authUser: (state) => state.user.currentUser,
+    ...mapGetters({
+      isAuth: "user/isAuth",
+      isHidden: "cart/isHidden",
     }),
   },
   data() {
