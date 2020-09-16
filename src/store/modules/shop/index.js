@@ -15,9 +15,7 @@ const getters = enhancedGetters({
   },
   getCollectionsByCategory(state) {
     return function(id) {
-      return state.collections.find(
-        (collection) => collection.routeName === id
-      );
+      return state.collections[id];
     };
   },
 });

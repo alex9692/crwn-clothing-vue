@@ -1,6 +1,9 @@
 <template>
   <div class="collection-page">
-    <div v-for="item in collections" :key="item.id">{{ item }}</div>
+    <h2 class="title">{{title}}</h2>
+    <div class="items">
+      <CollectionItem v-for="item in items" :key="item.id" :item="item" />
+    </div>
   </div>
 </template>
 
@@ -16,7 +19,13 @@ export default {
     collections() {
       return this.$store.getters["shop/getCollectionsByCategory"](
         this.$route.params.collectionId
-      ).items;
+      );
+    },
+    items() {
+      return this.collections.items;
+    },
+    title() {
+      return this.collections.title;
     },
   },
 };
