@@ -13,15 +13,15 @@
 
 <script>
 import MenuItem from "@/components/MenuItem.component.vue";
-import section_data from "@/dummy-data/sections.data.js";
+import { mapGetters } from "vuex";
 export default {
   components: {
     MenuItem,
   },
-  data() {
-    return {
-      sections: section_data,
-    };
+  computed: {
+    ...mapGetters({
+      sections: "directory/getSectionData",
+    }),
   },
 };
 </script>

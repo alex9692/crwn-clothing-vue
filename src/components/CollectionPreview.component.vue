@@ -9,6 +9,7 @@
 
 <script>
 import CollectionItem from "@/components/CollectionItem.component.vue";
+
 export default {
   components: {
     CollectionItem,
